@@ -15,6 +15,7 @@ const buttonDelete = document.querySelector(".delete");
 const loader = document.querySelector(".spinner");
 const resultContainer = document.querySelector("#result-container");
 const resultTitle = document.querySelector(".message-header p");
+const contentDiv = document.querySelector("#content");
 
 buttonSearch.addEventListener("click", getResult);
 
@@ -47,14 +48,17 @@ async function getResult() {
 }
 
 async function addResultToHTML(result) {
-  const resultTitle = document.querySelector(".message-header p");
-  const contentDiv = document.querySelector("#content");
-
   if (result.results && result.results.length > 0) {
     const character = result.results[0];
     resultTitle.textContent = character.name;
 
     contentDiv.innerHTML = "";
+
+    if (character.homeworld) {
+      const response = await fetch(character.homeworld);
+      const planet = await response.json();
+      character.homeworld = planet.name;
+    }
 
     const ul = document.createElement("ul");
     for (const [key, value] of Object.entries(character)) {
