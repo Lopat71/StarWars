@@ -35,8 +35,15 @@
 
     <main>
       <section class="section">
-        <div class="column is-half is-offset-2">
-          <div id="byQueryBlock" class="search">
+        <div class="column is-half is-offset-2" style="display: flex">
+          <div class="vibor">
+            <select id="options" class="vibor options" name="options">
+              <option value="people">People</option>
+              <option value="planets">Planet</option>
+              <option value="species">Species</option>
+            </select>
+          </div>
+          <div id="byQueryBlock" class="search" style="width: 100%">
             <input class="is-large input" type="text" placeholder="Search..." />
             <button id="byQueryBtn" class="is-large button">Search</button>
           </div>

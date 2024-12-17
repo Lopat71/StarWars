@@ -11,7 +11,7 @@
 
 const buttonSearch = document.querySelector("#byQueryBtn");
 const inputSearch = document.querySelector(".input");
-const buttonDelete = document.querySelector(".delete");
+const deleteButton = document.querySelector(".delete");
 const loader = document.querySelector(".spinner");
 const resultContainer = document.querySelector("#result-container");
 const resultTitle = document.querySelector(".message-header p");
@@ -24,8 +24,6 @@ inputSearch.addEventListener("keydown", (event) => {
     buttonSearch.click();
   }
 });
-
-const deleteButton = document.querySelector(".delete");
 
 deleteButton.addEventListener("click", () => {
   const contentDiv = document.querySelector("#content");
@@ -40,8 +38,10 @@ deleteButton.addEventListener("click", () => {
 
 async function getResult() {
   loader.style.visibility = "visible";
-  const result = await starWars.searchCharacters(inputSearch.value);
-  console.log(result);
+
+  const query = inputSearch.value;
+  const result = await fetchResource(query);
+
   loader.style.visibility = "hidden";
   addResultToHTML(result);
   resultContainer.style.visibility = "visible";
@@ -84,5 +84,28 @@ async function addResultToHTML(result) {
     contentDiv.appendChild(ul);
   } else {
     resultTitle.textContent = "Not Found";
+  }
+}
+
+async function fetchResource(query) {
+  const resourceSelect = document.querySelector("#options");
+  const selectedResource = resourceSelect.value;
+
+  let result;
+
+  try {
+    if (selectedResource === "people") {
+      result = await starWars.searchCharacters(query);
+    } else if (selectedResource === "planets") {
+      result = await starWars.searchPlanets(query);
+    } else if (selectedResource === "species") {
+      result = await starWars.searchSpecies(query);
+    } else {
+      resultTitle.textContent = "Not Found";
+    }
+
+    return result;
+  } catch (error) {
+    return { results: [] };
   }
 }

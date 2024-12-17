@@ -30,22 +30,30 @@ const starWars = {
     }
   },
 
-  searchPlanets: (query) => {
-    return new Promise((resolve, reject) => {
-      fetch(`https://swapi.py4e.com/api/planets/?search=${query}`)
-        .then((response) => response.json())
-        .then((planets) => resolve(planets))
-        .catch((err) => console.log("searchPlanets error: ", err));
-    });
+  searchPlanets: async (query) => {
+    try {
+      const response = await fetch(
+        `https://swapi.py4e.com/api/planets/?search=${query}`
+      );
+
+      if (!response.ok) return "Error";
+      return response.json();
+    } catch (error) {
+      return "Error";
+    }
   },
 
-  searchSpecies: (query) => {
-    return new Promise((resolve, reject) => {
-      fetch(`https://swapi.py4e.com/api/species/?search=${query}`)
-        .then((response) => response.json())
-        .then((species) => resolve(species))
-        .catch((err) => console.log("searchSpecies error: ", err));
-    });
+  searchSpecies: async (query) => {
+    try {
+      const response = await fetch(
+        `https://swapi.py4e.com/api/species/?search=${query}`
+      );
+
+      if (!response.ok) return "Error";
+      return response.json();
+    } catch (error) {
+      return "Error";
+    }
   },
 
   // --- Get By Id Methods ---
