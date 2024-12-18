@@ -10,7 +10,9 @@
 // Объект с методом поиска персонажей
 
 const buttonSearch = document.querySelector("#byQueryBtn");
+
 const inputSearch = document.querySelector(".input");
+
 const deleteButton = document.querySelector(".delete");
 const loader = document.querySelector(".spinner");
 const resultContainer = document.querySelector("#result-container");

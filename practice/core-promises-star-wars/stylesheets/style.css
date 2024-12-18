@@ -10,12 +10,12 @@ body * {
 
 body {
   background-color: #e2e3e5;
-  min-height: 100vh;
-  max-height: 100vh;
-  overflow-y: hidden;
-
-  background-image: url(../images/at-st.jpg);
-  background-size: cover;
+  min-height: 100vh; /* Минимальная высота экрана */
+  overflow-y: auto; /* Включает прокрутку, если контент превышает высоту экрана */
+  background-image: url(../images/at-st.jpg); /* Ссылка на изображение */
+  background-size: cover; /* Фон адаптируется по размеру */
+  background-position: center; /* Центрирование фона */
+  background-attachment: fixed; /* Фиксация фона */
 }
 
 .vibor {
